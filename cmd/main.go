@@ -1,7 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"ripProject/internal/app/apiserver"
+	"ripProject/internal/config"
+)
 
 func main() {
-	fmt.Printf("Testing lab working")
+	cfg, err := config.ReadConfig("C:\\Users\\mrclo\\Desktop\\RIP\\configs\\config.yaml")
+	if err != nil {
+		panic(err)
+	}
+	err = apiserver.Run(cfg)
+	if err != nil {
+		panic(err)
+	}
 }
