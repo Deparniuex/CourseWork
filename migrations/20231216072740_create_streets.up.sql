@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS streets (
+    id SERIAL PRIMARY KEY,
+    name text NOT NULL
+);

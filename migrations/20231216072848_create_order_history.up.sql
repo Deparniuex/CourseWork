@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS order_history(
+    id SERIAL PRIMARY KEY,
+    ord bigint NOT NULL REFERENCES orders ON DELETE CASCADE
+)

@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS orders(
+    id SERIAL PRIMARY KEY,
+    restaurant bigint NOT NULL REFERENCES restaurants ON DELETE CASCADE,
+    dish bigint NOT NULL REFERENCES dishes ON DELETE CASCADE
+)
