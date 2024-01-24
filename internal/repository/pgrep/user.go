@@ -20,13 +20,14 @@ func (p *Postgres) CreateUser(ctx context.Context, u *entity.User) error {
 			first_name,
 			last_name,
 			password_hash,
-			phone
+			phone,
+			role
 		)
-		VALUES ($1, $2, $3, $4, $5, $6)
+		VALUES ($1, $2, $3, $4, $5, $6, $7)
 		RETURNING id
 		`, usersTable)
 
-	err := p.Pool.QueryRow(ctx, query, u.Username, u.Email, u.FirstName, u.LastName, u.Password.Hash, u.Phone).Scan(&u.ID)
+	err := p.Pool.QueryRow(ctx, query, u.Username, u.Email, u.FirstName, u.LastName, u.Password.Hash, u.Phone, u.Role.String()).Scan(&u.ID)
 	if err != nil {
 		return err
 	}

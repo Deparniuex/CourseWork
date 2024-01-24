@@ -61,3 +61,29 @@ func (p *Postgres) UpdateCity(ctx context.Context, city *entity.City) error {
 
 	return nil
 }
+
+func (p *Postgres) GetCities(ctx context.Context) ([]*entity.City, error) {
+	query := fmt.Sprintf(`
+		SELECT * FROM %s;
+	`, citiesTable)
+	rows, err := p.Pool.Query(ctx, query)
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var cities []*entity.City
+	for rows.Next() {
+		var city entity.City
+		rows.Scan(
+			&city.ID,
+			&city.CityName,
+		)
+		cities = append(cities, &city)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return cities, nil
+}

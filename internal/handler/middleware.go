@@ -2,7 +2,6 @@ package handler
 
 import (
 	"errors"
-	"log"
 	"net/http"
 	"ripProject/internal/entity"
 	"ripProject/internal/handler/api"
@@ -61,7 +60,6 @@ func (h *Handler) authenticate(ctx *gin.Context) bool {
 		})
 		return false
 	}
-	log.Println(token[1])
 	user, err := h.Services.GetUserByToken(ctx, token[1])
 	if err != nil {
 		switch {

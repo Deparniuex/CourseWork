@@ -1,2 +1,4 @@
 .vs/
 Sources.txt
+**/.vscode/
+**/configs/config.yaml

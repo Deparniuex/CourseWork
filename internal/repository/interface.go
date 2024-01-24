@@ -41,4 +41,5 @@ type Repository interface {
 	CreateCity(ctx context.Context, menu *entity.City) error
 	UpdateCity(ctx context.Context, city *entity.City) error
 	DeleteCity(ctx context.Context, cityID int64) error
+	GetCities(ctx context.Context) ([]*entity.City, error)
 }

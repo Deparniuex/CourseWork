@@ -16,3 +16,7 @@ func (m *Manager) DeleteCity(ctx context.Context, cityID int64) error {
 func (m *Manager) UpdateCity(ctx context.Context, city *entity.City) error {
 	return m.Repository.UpdateCity(ctx, city)
 }
+
+func (m *Manager) GetCities(ctx context.Context) ([]*entity.City, error) {
+	return m.Repository.GetCities(ctx)
+}

@@ -42,7 +42,7 @@ func (h *Handler) createCity(ctx *gin.Context) {
 }
 
 func (h *Handler) deleteCity(ctx *gin.Context) {
-	//var req api.DeleteCityRequest
+
 	var id api.ID
 
 	err := ctx.ShouldBindUri(&id)
@@ -62,12 +62,23 @@ func (h *Handler) deleteCity(ctx *gin.Context) {
 		return
 	}
 
-	// if req.Role >= entity.MODERATOR {
-	// 	log.Println()
-	// }
-
 	ctx.JSON(http.StatusOK, &api.DefaultResponse{
 		Code:    http.StatusOK,
 		Message: "city succesfully deleted",
+	})
+}
+
+func (h *Handler) getCities(ctx *gin.Context) {
+	cities, err := h.Services.GetCities(ctx)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, &api.ErrorResponse{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+		})
+	}
+	ctx.JSON(http.StatusOK, &api.GetCityResponse{
+		Code:    http.StatusOK,
+		Message: "OK",
+		Body:    cities,
 	})
 }

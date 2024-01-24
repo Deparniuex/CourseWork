@@ -7,8 +7,9 @@ import (
 )
 
 type Config struct {
-	HTTP ServerConfig `yaml:"http"`
-	DB   DBConfig     `yaml:"db"`
+	HTTP  ServerConfig `yaml:"http"`
+	DB    DBConfig     `yaml:"db"`
+	Admin AdminConfig  `yaml:"admin"`
 }
 
 type ServerConfig struct {
@@ -23,6 +24,15 @@ type DBConfig struct {
 	User     string `yaml:"user"`
 	Password string `yaml:"password" env:"PASSWORD"`
 	DBName   string `yaml:"dbname"`
+}
+
+type AdminConfig struct {
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
+	Email    string `yaml:"email"`
+	Name     string `yaml:"name"`
+	Lastname string `yaml:"lastname"`
+	Phone    string `yaml:"phone"`
 }
 
 func ReadConfig(path string) (*Config, error) {

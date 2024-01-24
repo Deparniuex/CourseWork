@@ -3,13 +3,15 @@ package handler
 import (
 	"ripProject/internal/entity"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func (h *Handler) InitRouter() *gin.Engine {
 	router := gin.Default()
-	router.Use(gin.Logger())
-	router.Use(gin.Recovery())
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = true
+	router.Use(cors.New(config))
 
 	restaurant := router.Group("/restaurants")
 	city := router.Group("cities")
@@ -21,5 +23,6 @@ func (h *Handler) InitRouter() *gin.Engine {
 	restaurant.POST("/register", h.requireRole(entity.MODERATOR), h.createRestaurant)
 	city.POST("/create", h.requireRole(entity.ADMIN), h.createCity)
 	street.POST("/create", h.requireRole(entity.ADMIN), h.createStreet)
+	city.GET("/cities", h.getCities)
 	return router
 }

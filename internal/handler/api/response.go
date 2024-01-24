@@ -33,3 +33,9 @@ type GetDishesByIDResponse struct {
 	Message string         `json:"message"`
 	Body    []*entity.Dish `json:"body"`
 }
+
+type GetCityResponse struct {
+	Code    int            `json:"code"`
+	Message string         `json:"message"`
+	Body    []*entity.City `json:"body"`
+}
